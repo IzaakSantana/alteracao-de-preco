@@ -1,12 +1,56 @@
-let checkbox = document.getElementById("checkboxInput");
+let form = document.querySelector("#mainForm");
+let checkbox = document.querySelector("#checkboxInput");
+let calculateButton = document.querySelector("#calculateButton");
+let discountInput = document.querySelector("#discount");
+let valueOnSaleInput = document.querySelector("#valueOnSale");
+let originalValueDiv = document.querySelector("#originalValueDiv");
+let originalValueInput = document.querySelector("#originalValue");
 
-let elementsToHide = [
-    document.querySelector("#discountDiv"),
-    document.querySelector("#valueOnSaleDiv")
-]
+let discountDiv = document.querySelector("#discountDiv");
+let valueOnSaleDiv = document.querySelector("#valueOnSaleDiv");
+
+let resultDiv = document.querySelector("#result")
 
 checkbox.addEventListener("change", () => {
     discountDiv.classList.toggle("hidden");
     valueOnSaleDiv.classList.toggle("hidden");
+    originalValueDiv.classList.toggle("hidden");
+
+    discountInput.disabled = checkbox.checked;
+    valueOnSaleInput.disabled = !checkbox.checked;
+    originalValueInput.disabled = !checkbox.checked;
+
 
 });
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    calculate(new FormData(form));
+
+    
+});
+
+function calculate(formData) {
+    let counter = formData.get("itemsToCalculate");
+    let onSalesQuantity = formData.get("onSalesQuantity");
+    let desiredValue = formData.get("desiredValue");
+
+    let discount 
+    let valueOnSale
+    let finalDiscount
+    let finalValue
+    let valuePerUnit
+    
+    if (!discountInput.disabled) {
+        discount = formData.get("discount")
+    } else {
+        discount = 0;
+    }
+
+    for (let i = 1; i <= counter; i++) {
+        let element = document.createElement("p")
+        element.innerText = ``
+        resultDiv.appendChild()
+    }   
+}

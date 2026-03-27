@@ -20,31 +20,38 @@
 
         <div class="formRow">
             <span>Quantidade para calcular:</span> <input type="number" name="itemsToCalculate" id="itemsToCalculate"
-                class="number" required>
+                class="number" required min="1">
         </div>
         <div class="formRow">
             <span>Quantidade de items da promoção:</span> <input type="number" name="onSaleQuantity" id="onSaleQuantity"
-                class="number" required>
+                class="number" required min="0">
         </div>
         <div class="formRow">
             <span>Valor para alterar: </span> <input type="number" name="desiredValue" id="desiredValue" class="number"
-                required>
+                required min="0">
         </div>
         <div class="formRow" id="discountDiv">
             <span id="discountSpan">Desconto:</span> <input class="number" type="number" name="discount" id="discount"
-                class="number" required>
+                class="number" required min="0">
         </div>
 
         <div class="formRow hidden" id="valueOnSaleDiv">
             <span>Valor unitário na promoção:</span> <input type="number"
-                name="valueOnSale" id="valueOnSale" class="number" required>
+                name="valueOnSale" id="valueOnSale" class="number" min="0" required disabled>
         </div>
-
+        <div class="formRow hidden" id="originalValueDiv">
+            <span>Valor original: </span> <input class="number" type="number" name="originalValue" id="originalValue" required disabled>
+        </div>
         <div>
             <span class="checkboxSpan">Não sei o valor do desconto</span> <input type="checkbox" name="checkboxInput" id="checkboxInput">
         </div>
-
+        
+        <div id="buttonDiv"><input type="submit" value="Calcular" id="calculateButton"></div>
     </form>
+
+    <div id="result">
+        
+    </div>
     <script src="./src/scripts/main.js"></script>
 </body>
 
