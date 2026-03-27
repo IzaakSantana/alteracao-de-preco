@@ -26,7 +26,7 @@ checkbox.addEventListener("change", () => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    resultDiv.querySelector("h1").classList.remove("hidden");
+    resultDiv.querySelector("h2").classList.remove("hidden");
 
     calculate(new FormData(form));
 
