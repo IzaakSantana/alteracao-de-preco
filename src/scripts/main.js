@@ -11,6 +11,8 @@ let valueOnSaleDiv = document.querySelector("#valueOnSaleDiv");
 
 let resultDiv = document.querySelector("#result")
 
+let lastData
+
 checkbox.addEventListener("change", () => {
     discountDiv.classList.toggle("hidden");
     valueOnSaleDiv.classList.toggle("hidden");
@@ -26,11 +28,11 @@ checkbox.addEventListener("change", () => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    let data = new FormData(form);
+
     resultDiv.querySelector("h2").classList.remove("hidden");
 
-    calculate(new FormData(form));
-
-
+    calculate(data);
 });
 
 function calculate(formData) {

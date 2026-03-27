@@ -46,7 +46,10 @@
             <span class="checkboxSpan">Não sei o valor do desconto</span> <input type="checkbox" name="checkboxInput" id="checkboxInput">
         </div>
         
-        <div id="buttonDiv"><input type="submit" value="Calcular" id="calculateButton"></div>
+        <div id="buttonDiv">
+            <input type="submit" value="Calcular" id="calculateButton" class="button">
+            <input type="button" value="Limpar" class="button" onclick="window.location.reload()">
+        </div>
     </form>
 
     <div id="result">

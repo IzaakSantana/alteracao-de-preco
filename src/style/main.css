@@ -23,16 +23,18 @@ body {
     width: 55px;
 }
 
-#buttonDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-#calculateButton {
+.button {
     cursor: pointer;
     align-self: center;
 }
+
+#buttonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
 
 #checkboxInput {
     cursor: pointer;
