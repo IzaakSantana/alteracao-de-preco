@@ -1,6 +1,8 @@
 let form = document.querySelector("#mainForm");
 let checkbox = document.querySelector("#checkboxInput");
 let calculateButton = document.querySelector("#calculateButton");
+let genListButton = document.querySelector("#generateListButton");
+let cleanButton = document.querySelector("#cleanButton");
 let discountInput = document.querySelector("#discount");
 let valueOnSaleInput = document.querySelector("#valueOnSale");
 let originalValueDiv = document.querySelector("#originalValueDiv");
@@ -11,7 +13,6 @@ let valueOnSaleDiv = document.querySelector("#valueOnSaleDiv");
 
 let resultTittle = document.querySelector("#resultTittle");
 let resultDiv = document.querySelector("#result");
-let cleanButton = document.querySelector("#cleanButton");
 
 checkbox.addEventListener("change", () => {
     discountDiv.classList.toggle("hidden");
@@ -25,25 +26,47 @@ checkbox.addEventListener("change", () => {
 
 });
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
 
-    let data = new FormData(form);
+calculateButton.addEventListener("click", () => {
+    if (isFormValid()) {
+        let result = calculate(getFormData("itemsToCalculate")).valuePerUnit;
+        let element = document.createElement("p");
+        
+        resultDiv.innerHTML = "";
 
-    resultTittle.classList.remove("hidden");
+        element.innerHTML = `Alterar para o valor: ${formatToCurrency(result)}`;
+        element.classList.add("bigText");
+        
+        resultDiv.appendChild(element);
+    }
+})
 
-    calculate(data);
-});
+genListButton.addEventListener("click", () => {
+   if (isFormValid()) {
+        generateList();
+   } 
+})
 
 cleanButton.addEventListener('click', () => {
     resultDiv.innerHTML = "";
     resultTittle.classList.toggle("hidden");
 });
 
-function calculate(formData) {
-    let counter = formData.get("itemsToCalculate");
-    let onSaleQuantity = formData.get("onSaleQuantity");
-    let desiredValue = formData.get("desiredValue");
+function formatToCurrency(value) {
+    return value.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+}
+
+function getFormData(value) {
+    return Number(new FormData(form).get(value));
+}
+
+function isFormValid() {
+    return form.reportValidity();
+}
+
+function calculate(itemsToCalculate) {
+    let onSaleQuantity = getFormData("onSaleQuantity");
+    let desiredValue = getFormData("desiredValue");
 
     let discount;
     let finalDiscount;
@@ -51,10 +74,10 @@ function calculate(formData) {
     let valuePerUnit;
 
     if (!discountInput.disabled) {
-        discount = formData.get("discount")
+        discount = getFormData("discount")
     } else {
-        let valueOnSale = formData.get("valueOnSale");
-        let originalValue = formData.get("originalValue");
+        let valueOnSale = getFormData("valueOnSale");
+        let originalValue = getFormData("originalValue");
 
         let onSaleTotalValue = valueOnSale * onSaleQuantity;
         let rawTotalValue = originalValue * onSaleQuantity;
@@ -62,17 +85,30 @@ function calculate(formData) {
         discount = rawTotalValue - onSaleTotalValue;
     }
 
+    finalDiscount = discount * Math.floor(itemsToCalculate / onSaleQuantity);
+    valuePerUnit = (itemsToCalculate * desiredValue + finalDiscount) / itemsToCalculate;
+    finalValue = desiredValue * itemsToCalculate;
+
+    return {
+        valuePerUnit,
+        finalValue
+    }
+}
+
+function generateList() {
+    let counter = getFormData("itemsToCalculate");
+
+    resultDiv.innerHTML = "";
+    resultTittle.classList.toggle("hidden");
+
     for (let i = 1; i <= counter; i++) {
         let element = document.createElement("p")
+        let { valuePerUnit, finalValue } = calculate(i);
 
-        resultDiv.innerHTML = "";
-
-        finalDiscount = discount * Math.floor(i / onSaleQuantity);
-        valuePerUnit = ((i * desiredValue + finalDiscount) / i).toFixed(2);
-        finalValue = desiredValue * i;
-
-        console.log(`${i} --- ${valuePerUnit} --- ${finalValue}`)
-        element.innerText = `${i} --- R$ ${valuePerUnit} --- R$ ${finalValue}`;
-        resultDiv.appendChild(element)
+        element.innerText = `${i} - R$ ${valuePerUnit.toFixed(2)} - R$ ${finalValue.toFixed(2)}`;
+        element.classList.add("bigText");
+        resultDiv.appendChild(element);
     }
+    
+    navigator.clipboard.writeText(resultDiv.innerText);
 }

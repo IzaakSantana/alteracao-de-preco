@@ -3,10 +3,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
-
-
 
 .formRow {
     display: flex;
@@ -26,6 +24,11 @@ body {
 .button {
     cursor: pointer;
     align-self: center;
+}
+
+.bigText {
+    font-size: 150%;
+    font-weight: bold;
 }
 
 #buttonDiv {
