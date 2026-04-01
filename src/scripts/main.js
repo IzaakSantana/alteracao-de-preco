@@ -103,7 +103,7 @@ function generateList() {
         let element = document.createElement("p")
         let { valuePerUnit, finalValue } = calculate(i);
 
-        element.innerText = `${i} - R$ ${valuePerUnit.toFixed(2)} - R$ ${finalValue.toFixed(2)}`;
+        element.innerText = `${i} - ${formatToCurrency(valuePerUnit)} - ${formatToCurrency(finalValue)}`;
         element.classList.add("bigText");
         resultDiv.appendChild(element);
     }
