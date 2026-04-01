@@ -13,8 +13,6 @@ let resultTittle = document.querySelector("#resultTittle");
 let resultDiv = document.querySelector("#result");
 let cleanButton = document.querySelector("#cleanButton");
 
-let lastData
-
 checkbox.addEventListener("change", () => {
     discountDiv.classList.toggle("hidden");
     valueOnSaleDiv.classList.toggle("hidden");

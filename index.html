@@ -17,7 +17,7 @@
     </header>
 
     <form id="mainForm">
-
+        <!-- Text Inputs-->
         <div class="formRow">
             <span>Quantidade para calcular:</span> <input type="number" name="itemsToCalculate" id="itemsToCalculate"
                 class="number" required min="1" step="0.01">
@@ -36,25 +36,29 @@
         </div>
 
         <div class="formRow hidden" id="valueOnSaleDiv">
-            <span>Valor unitário na promoção:</span> <input type="number"
-                name="valueOnSale" id="valueOnSale" class="number" min="0" required disabled step="0.01">
+            <span>Valor unitário na promoção:</span> <input type="number" name="valueOnSale" id="valueOnSale"
+                class="number" min="0" required disabled step="0.01">
         </div>
         <div class="formRow hidden" id="originalValueDiv">
-            <span>Valor original: </span> <input class="number" type="number" name="originalValue" id="originalValue" required disabled step="0.01">
+            <span>Valor original: </span> <input class="number" type="number" name="originalValue" id="originalValue"
+                required disabled step="0.01">
         </div>
         <div>
-            <span class="checkboxSpan">Não sei o valor do desconto</span> <input type="checkbox" name="checkboxInput" id="checkboxInput">
+            <span class="checkboxSpan">Não sei o valor do desconto</span> <input type="checkbox" name="checkboxInput"
+                id="checkboxInput">
         </div>
-        
+            
+        <!-- Button Inputs-->
+
         <div id="buttonDiv">
             <input type="submit" value="Calcular" id="calculateButton" class="button">
             <input type="button" value="Limpar" class="button" id="cleanButton">
         </div>
     </form>
 
-    <h2 class="hidden" id="resultTittle">Unidade --- Valor para Alterar --- Valor Final</h2>   
+    <h2 class="hidden" id="resultTittle">Unidade --- Valor para Alterar --- Valor Final</h2>
     <div id="result">
-        
+
     </div>
     <script src="./src/scripts/main.js"></script>
 </body>
