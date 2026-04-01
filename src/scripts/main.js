@@ -9,7 +9,9 @@ let originalValueInput = document.querySelector("#originalValue");
 let discountDiv = document.querySelector("#discountDiv");
 let valueOnSaleDiv = document.querySelector("#valueOnSaleDiv");
 
-let resultDiv = document.querySelector("#result")
+let resultTittle = document.querySelector("#resultTittle");
+let resultDiv = document.querySelector("#result");
+let cleanButton = document.querySelector("#cleanButton");
 
 let lastData
 
@@ -30,9 +32,14 @@ form.addEventListener("submit", (e) => {
 
     let data = new FormData(form);
 
-    resultDiv.querySelector("h2").classList.remove("hidden");
+    resultTittle.classList.remove("hidden");
 
     calculate(data);
+});
+
+cleanButton.addEventListener('click', () => {
+    resultDiv.innerHTML = "";
+    resultTittle.classList.toggle("hidden");
 });
 
 function calculate(formData) {
@@ -59,6 +66,8 @@ function calculate(formData) {
 
     for (let i = 1; i <= counter; i++) {
         let element = document.createElement("p")
+
+        resultDiv.innerHTML = "";
 
         finalDiscount = discount * Math.floor(i / onSaleQuantity);
         valuePerUnit = ((i * desiredValue + finalDiscount) / i).toFixed(2);
