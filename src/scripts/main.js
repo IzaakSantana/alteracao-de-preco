@@ -22,8 +22,6 @@ checkbox.addEventListener("change", () => {
     discountInput.disabled = checkbox.checked;
     valueOnSaleInput.disabled = !checkbox.checked;
     originalValueInput.disabled = !checkbox.checked;
-
-
 });
 
 
