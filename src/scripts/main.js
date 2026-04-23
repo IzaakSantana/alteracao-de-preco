@@ -37,6 +37,10 @@ calculateButton.addEventListener("click", () => {
         
         resultDiv.appendChild(element);
     }
+
+    if (!resultTittle.classList.toggle("hidden")) {
+        resultTittle.classList.toggle("hidden");
+    }
 })
 
 genListButton.addEventListener("click", () => {
@@ -97,7 +101,10 @@ function generateList() {
     let counter = getFormData("itemsToCalculate");
 
     resultDiv.innerHTML = "";
-    resultTittle.classList.toggle("hidden");
+    
+    if (!resultTittle.classList.toggle("hidden")) {
+        resultTittle.classList.toggle("hidden");
+    }
 
     for (let i = 1; i <= counter; i++) {
         let element = document.createElement("p")
