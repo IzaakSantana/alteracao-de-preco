@@ -50,9 +50,15 @@ genListButton.addEventListener("click", () => {
 })
 
 cleanButton.addEventListener('click', () => {
-    resultDiv.innerHTML = "";
-    resultTittle.classList.toggle("hidden");
+    clearResultDiv();
 });
+
+// Functions
+
+function clearResultDiv() {
+    resultDiv.innerHTML = "";
+    resultTittle.classList.toggle("hidden", true);
+}
 
 function formatToCurrency(value) {
     return value.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
@@ -100,11 +106,8 @@ function calculate(itemsToCalculate) {
 function generateList() {
     let counter = getFormData("itemsToCalculate");
 
-    resultDiv.innerHTML = "";
-    
-    if (!resultTittle.classList.toggle("hidden")) {
-        resultTittle.classList.toggle("hidden");
-    }
+    clearResultDiv();
+    resultTittle.classList.toggle("hidden", false);
 
     for (let i = 1; i <= counter; i++) {
         let element = document.createElement("p")
