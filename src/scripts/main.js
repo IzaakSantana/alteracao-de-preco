@@ -123,5 +123,5 @@ function generateList() {
         `
     }
     
-    navigator.clipboard.writeText(resultDiv.innerText);
+    navigator.clipboard.writeText(resultTable.innerText);
 }
