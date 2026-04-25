@@ -6,6 +6,21 @@ body {
     min-height: 100vh;
 }
 
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #000000;
+    padding: 5px;
+}
+
+th {
+    font-weight: bold;
+    font-size: 150%;
+}
+
 .formRow {
     display: flex;
     flex-direction: row;

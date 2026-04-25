@@ -11,8 +11,9 @@ let originalValueInput = document.querySelector("#originalValue");
 let discountDiv = document.querySelector("#discountDiv");
 let valueOnSaleDiv = document.querySelector("#valueOnSaleDiv");
 
-let resultTittle = document.querySelector("#resultTittle");
-let resultDiv = document.querySelector("#result");
+let resultDiv = document.querySelector("#resultDiv");
+let resultTable = document.querySelector("#resultTable");
+let emptyTable = resultTable.innerHTML
 
 checkbox.addEventListener("change", () => {
     discountDiv.classList.toggle("hidden");
@@ -30,17 +31,17 @@ calculateButton.addEventListener("click", () => {
         let result = calculate(getFormData("itemsToCalculate")).valuePerUnit;
         let element = document.createElement("p");
         
+        resultTable.classList.toggle("hidden", true);
+
         resultDiv.innerHTML = "";
 
         element.innerHTML = `Alterar para o valor: ${formatToCurrency(result)}`;
         element.classList.add("bigText");
         
         resultDiv.appendChild(element);
-    }
 
-    if (!resultTittle.classList.toggle("hidden")) {
-        resultTittle.classList.toggle("hidden");
-    }
+        resultTable.classList.toggle("hidden", true);
+    }   
 })
 
 genListButton.addEventListener("click", () => {
@@ -50,14 +51,15 @@ genListButton.addEventListener("click", () => {
 })
 
 cleanButton.addEventListener('click', () => {
-    clearResultDiv();
+    clearResults();
 });
 
 // Functions
 
-function clearResultDiv() {
+function clearResults() {
     resultDiv.innerHTML = "";
-    resultTittle.classList.toggle("hidden", true);
+    resultTable.classList.toggle("hidden", true);
+    resultTable.innerHTML = emptyTable;
 }
 
 function formatToCurrency(value) {
@@ -106,16 +108,19 @@ function calculate(itemsToCalculate) {
 function generateList() {
     let counter = getFormData("itemsToCalculate");
 
-    clearResultDiv();
-    resultTittle.classList.toggle("hidden", false);
+    clearResults();
+    resultTable.classList.toggle("hidden", false);
 
     for (let i = 1; i <= counter; i++) {
-        let element = document.createElement("p")
         let { valuePerUnit, finalValue } = calculate(i);
 
-        element.innerText = `${i} - ${formatToCurrency(valuePerUnit)} - ${formatToCurrency(finalValue)}`;
-        element.classList.add("bigText");
-        resultDiv.appendChild(element);
+        resultTable.innerHTML += `
+            <tr>
+                <td>${i}</td>
+                <td>${formatToCurrency(valuePerUnit)}</td>
+                <td>${formatToCurrency(finalValue)}</td>
+            </tr>
+        `
     }
     
     navigator.clipboard.writeText(resultDiv.innerText);
